@@ -1,0 +1,68 @@
+{
+    "revanced": 
+    {
+        "projectName": "Revanced",
+        "sources": 
+        {
+            "cli":
+            {
+                "org": "revanced",
+                "repo": "revanced-cli"
+            },
+            "patches":
+            {
+                "org": "revanced",
+                "repo": "revanced-patches"
+            },
+            "integrations":
+            {
+                "org": "revanced",
+                "repo": "revanced-integrations"
+            }
+        }
+    },
+    "inotia00": 
+    {
+        "projectName": "Revanced-Extended",
+        "sources": 
+        {
+            "cli":
+            {
+                "org": "inotia00",
+                "repo": "revanced-cli"
+            },
+            "patches":
+            {
+                "org": "inotia00",
+                "repo": "revanced-patches"
+            },
+            "integrations":
+            {
+                "org": "inotia00",
+                "repo": "revanced-integrations"
+            }
+        }
+    },
+    "kitadai31": 
+    {
+        "projectName": "RVX(Android6-7)",
+        "sources": 
+        {
+            "cli":
+            {
+                "org": "kitadai31",
+                "repo": "rvcli"
+            },
+            "patches":
+            {
+                "org": "kitadai31",
+                "repo": "revanced-patches-android6-7"
+            },
+            "integrations":
+            {
+                "org": "kitadai31",
+                "repo": "revanced-integrations"
+            }
+        }
+    }
+}
