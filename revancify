@@ -26,7 +26,7 @@ help() {
 \e[1;33m-r, --reinstall   \e[1;34mReinstall revancify\e[0m
 \e[1;33m-h, --help        \e[1;34mPrints help statement\e[0m
 
-\e[1;35mGithub repo: https://github.com/decipher3114/Revancify\nTelegram channel: https://t.me/revancify\nTelegram support group: https://t.me/revancifychat\e[0m"
+\e[1;35mGithub repo: https://github.com/kastentop2005/Revancify"
     exit "$1"
 }
 
@@ -133,7 +133,7 @@ checkrevancify() {
         case "$choice" in
         y | Y)
             rm -rf "$path"
-            git clone --depth=1 https://github.com/decipher3114/Revancify.git && revancify && exit
+            git clone --depth=1 https://github.com/kastentop2005/Revancify.git && revancify && exit
             ;;
         n | N)
             echo "Removing revancify completely !!"
