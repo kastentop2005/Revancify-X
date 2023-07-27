@@ -1,7 +1,8 @@
-# Revancify 🛠️ ![Hi](https://img.shields.io/github/stars/decipher3114/Revancify?style=flat-square)
-### A TUI wrapper for Revanced CLI with amazing features.
+# NOTICE
+### Revancify project is currently dead and doesn't work as of now. Stay tuned for future updates!
 
-[![TelegramChannel](https://img.shields.io/badge/Telegram_Channel-2CA5E0?style=for-the-badge&logo=Telegram&logoColor=FFFFFF)](https://t.me/revancify) [![TelegramChannel](https://img.shields.io/badge/Telegram_Support_Chat-2CA5E0?style=for-the-badge&logo=Telegram&logoColor=FFFFFF)](https://t.me/revancifychat)
+# Revancify 🛠️ ![Hi](https://img.shields.io/github/stars/kastentop2005/Revancify?style=flat-square)
+### A TUI wrapper for Revanced CLI with amazing features.
 
 ## Termux
 | Android Version | Download Link|
@@ -20,23 +21,19 @@
 7. Convenient Installation and usage
 6. Lightweight and faster than any other tool
 
-# Guide
-
-[![VideoGuide](https://img.shields.io/badge/Video_Guide_(Telegram_Channel)-2CA5E0?style=for-the-badge&logo=Telegram&logoColor=FFFFFF)](https://t.me/revancify/422)
-
 
 ## Installation
 1. Open Termux.  
 2. Copy and paste this command.  
 ```
-curl -sL "https://raw.githubusercontent.com/decipher3114/Revancify/main/install.sh" | bash
+curl -sL "https://raw.githubusercontent.com/kastentop2005/Revancify/main/install.sh" | bash
 ```
 
 <details>
   <summary>If the above one doesn't work, use this.</summary>
 
   ```
-pkg update -y -o Dpkg::Options::="--force-confnew" && pkg install git -y && git clone --depth=1 https://github.com/decipher3114/Revancify.git && ./Revancify/revancify
+pkg update -y -o Dpkg::Options::="--force-confnew" && pkg install git -y && git clone --depth=1 https://github.com/kastentop2005/Revancify.git && ./Revancify/revancify
 ```
 </details>
 
