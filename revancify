@@ -122,8 +122,9 @@ installdependencies() {
         pkg install -y aapt2
     else
         echo "aapt2 is already installed. Skipping..."
+    fi
 
-    if ! command -v pup &> /dev/bull
+    if ! command -v pup &> /dev/null
     then
         echo "pup was not found, installing..."
         pkg install -y pup
