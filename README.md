@@ -2,6 +2,8 @@
 ### A TUI wrapper for Revanced CLI with amazing features.
 ### Revancify X (or simply "Revx" [riˈvɪks]) is continuation of the discontinued Revancify manager by [decipher3114](https://github.com/decipher3114)
 
+[![TelegramChannel](https://img.shields.io/badge/Telegram_Channel-2CA5E0?style=for-the-badge&logo=Telegram&logoColor=FFFFFF)](https://t.me/revancifyx) [![TelegramChannel](https://img.shields.io/badge/Telegram_Support_Chat-2CA5E0?style=for-the-badge&logo=Telegram&logoColor=FFFFFF)](https://t.me/revxchat)
+
 ## Termux
 | Android Version | Download Link|
 | ---- | ----- |
