@@ -20,18 +20,18 @@ else
     [[ "$(pup -p --charset utf-8 ':parent-of(div:contains("noarch"))' <<<"$page2")" == "" ]] || arch=noarch
     [[ "$(pup -p --charset utf-8 ':parent-of(div:contains("universal"))' <<<"$page2")" == "" ]] || arch=universal
 
-    readarray -t url1 < <(./pup -p --charset utf-8 ":parent-of(div:contains(\"$arch\")) a.accent_color attr{href}" <<<"$page2")
+    readarray -t url1 < <(pup -p --charset utf-8 ":parent-of(div:contains(\"$arch\")) a.accent_color attr{href}" <<<"$page2")
 
     [ "${#url1[@]}" -eq 0 ] && echo noapk >&2 && exit 1
 fi
 echo 33
 
-url2=$(curl -sL -A "$UserAgent" "https://www.apkmirror.com${url1[-1]}" | ./pup -p --charset utf-8 'a:contains("Download APK") attr{href}')
+url2=$(curl -sL -A "$UserAgent" "https://www.apkmirror.com${url1[-1]}" | pup -p --charset utf-8 'a:contains("Download APK") attr{href}')
 
 [ "$url2" == "" ] && echo error >&2 && exit 1
 echo 66
 
-url3=$(curl -sL -A "$UserAgent" "https://www.apkmirror.com$url2" | ./pup -p --charset UTF-8 'a[data-google-vignette="false"][rel="nofollow"] attr{href}')
+url3=$(curl -sL -A "$UserAgent" "https://www.apkmirror.com$url2" | pup -p --charset UTF-8 'a[data-google-vignette="false"][rel="nofollow"] attr{href}')
 
 [ "$url3" == "" ] && echo error >&2 && exit 1
 echo 100
