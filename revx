@@ -86,7 +86,7 @@ trap terminate SIGTERM SIGINT SIGABRT
 DATA="$HOME/RevancifyX-data"
 [ ! -d $DATA ] && mkdir -p "$DATA"
 # shellcheck source=/dev/null
-source "$DATA/.envVars" > /dev/null 2>&1
+source "$DATA/.envVars" &> /dev/null
 [ "${lightTheme:-false}" == "true" ] && theme=Light || theme=Dark
 export DIALOGRC="$path/configs/.dialogrc$theme"
 
@@ -106,21 +106,18 @@ checkdependencies() {
         fi
     done
 
-
     # Here come dependecies which have different repository names from the binary ones
-    if ! command -v tput; then
+    if ! command -v tput &> /dev/null; then
         echo "Couldn't find ncurses. Installing..."
         pkg install -y ncurses-utils
     fi
 
-    if ! command -v java; then
-        echo "Couldn't find java. Installing..."
+    if ! command -v java &> /dev/null; then
+        echo "Couldn't find Java. Installing..."
         pkg install -y openjdk-17
-    else
-        echo "Found Java!"
     fi
 
-    if ! command -v revx; then
+    if ! command -v revx &> /dev/null; then
         cp "$path/revx" "$BIN/revx"
     fi
 }
