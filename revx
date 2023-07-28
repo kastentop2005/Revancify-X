@@ -92,7 +92,7 @@ export DIALOGRC="$path/configs/.dialogrc$theme"
 
 checkdependencies() {
     [ ! -d "$HOME/storage" ] && termux-setup-storage
-    for dep in aapt2 pup wget tput dialog jq
+    for dep in aapt2 pup wget dialog jq
     do
         if ping -c 1 google.com &> /dev/null; then
             if ! command -v $dep &> /dev/null; then
@@ -105,6 +105,11 @@ checkdependencies() {
             echo "Can't reach the internet. Check your connection settings and try again later"
         fi
     done
+
+    # Here come dependecies which have different repository names from the binary ones
+    if ! command -v tput; then
+        echo "Couldn't find ncurses. Installing..."
+        pkg install -y ncurses-utils
 
     if ! command -v java; then
         echo "Couldn't find java. Installing..."
