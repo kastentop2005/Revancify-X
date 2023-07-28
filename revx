@@ -91,23 +91,32 @@ source "$DATA/.envVars" > /dev/null 2>&1
 export DIALOGRC="$path/configs/.dialogrc$theme"
 
 checkdependencies() {
-    if command -v aapt2 pup java wget tput dialog jq revancify &> /dev/null; then
-        return 0
-    else
+    for dep in aapt2 pup wget tput dialog jq
+    do
         if ping -c 1 google.com &> /dev/null; then
-            installdependencies || (echo "Dependencies are not installed" && exit 1)
+            if ! command -v $dep &> /dev/null; then
+                echo "$dep is not installed. Downloading..."
+                pkg install -y $dep
+            else
+                echo "$dep is installed. Continue\n"
+            fi
         else
-            cp "$path/revx" "$BIN/revx"
-            echo -e "Dependencies are not installed\nRun the program again with internet connection"
-            exit 1
+            echo "Can't reach the internet. Check your connection settings and try again later"
         fi
+    done
+
+    if ! command -v java; then
+        echo "Couldn't find java. Installing..."
+        pkg install -y openjdk-17
+    else
+        echo "Found Java!"
     fi
 }
 
 installdependencies() {
     clear
     echo "Installing dependencies..."
-    cp "$path/revancify" "$BIN/revancify"
+    cp "$path/revx" "$BIN/revx"
     sleep 1
     [ ! -d "$HOME/storage" ] && termux-setup-storage
     pkg update -y -o Dpkg::Options::="--force-confnew" || return 1
