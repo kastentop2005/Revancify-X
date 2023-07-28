@@ -47,7 +47,7 @@ do
                         ;;
     "-r" | "--reinstall")
                         if ping -c 1 google.com &> /dev/null; then
-                            cd "$path"/.. && rm -rf "$path" && git clone --depth=1 https://github.com/kastentop2005/Revancify-X && revx && exit
+                            cd "$path"/.. && rm -rf "$path" && git clone --depth=1 https://github.com/kastentop2005/Revancify-X && mv Revancify-X/ RevancifyX/ && revx && exit
                         else
                             echo "No internet Connection !!"
                             exit 1
