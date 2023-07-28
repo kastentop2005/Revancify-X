@@ -1,4 +1,4 @@
-F#!/usr/bin/bash
+#!/usr/bin/bash
 
 HOME=/data/data/com.termux/files/home
 BIN=/data/data/com.termux/files/usr/bin
