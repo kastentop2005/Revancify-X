@@ -116,16 +116,19 @@ installdependencies() {
     git config --global pull.rebase true
     sed -i '/allow-external-apps/s/# //' "$HOME/.termux/termux.properties"
 
-    if [[ -e /data/data/com.termux/files/usr/bin/aapt2 ]]; then
-        echo "aapt2 is already installed. Skipping..."
-    else
+    if ! command -v aapt2 &> /dev/null
+    then
+        echo "aapt2 was not found, installing..."
         pkg install -y aapt2
-    fi
-
-    if [[ -e /data/data/comt.termux/files/usr/bin/pup ]]; then
-        echo "pup is already installed. Skipping..."
     else
+        echo "aapt2 is already installed. Skipping..."
+
+    if ! command -v pup &> /dev/bull
+    then
+        echo "pup was not found, installing..."
         pkg install -y pup
+    else
+        echo "pup is already installed. Skipping..."
     fi
 
     echo "Dependencies installed successfully."
