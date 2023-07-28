@@ -106,10 +106,12 @@ checkdependencies() {
         fi
     done
 
+
     # Here come dependecies which have different repository names from the binary ones
     if ! command -v tput; then
         echo "Couldn't find ncurses. Installing..."
         pkg install -y ncurses-utils
+    fi
 
     if ! command -v java; then
         echo "Couldn't find java. Installing..."
