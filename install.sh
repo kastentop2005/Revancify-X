@@ -31,6 +31,7 @@ Possible causes of error:
 fi
 
 if git clone --depth=1 https://github.com/kastentop2005/Revancify-X.git; then
+    mv Revancify-X/ RevancifyX/
     ./RevancifyX/revx
 else
     echo -e "\e[1;31mInstallation failed!\e[0m"
