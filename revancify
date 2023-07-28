@@ -107,7 +107,6 @@ checkdependencies() {
 installdependencies() {
     clear
     echo "Installing dependencies..."
-    arch=$(getprop ro.product.cpu.abi)
     cp "$path/revancify" "$BIN/revancify"
     sleep 1
     [ ! -d "$HOME/storage" ] && termux-setup-storage
