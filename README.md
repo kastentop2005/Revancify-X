@@ -19,6 +19,8 @@
 7. Convenient installation and usage
 6. Lightweight and faster than any other tool
 
+## Current problems
+- Can't download apps
 
 ## Installation
 1. Open Termux.  
