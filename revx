@@ -111,6 +111,10 @@ checkdependencies() {
     else
         echo "Found Java!"
     fi
+
+    if ! command -v revx; then
+        cp "$path/revx" "$BIN/revx"
+    fi
 }
 
 installdependencies() {
