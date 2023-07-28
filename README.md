@@ -31,7 +31,7 @@ curl -sL "https://raw.githubusercontent.com/kastentop2005/Revancify-X/main/insta
   <summary>If the above one doesn't work, use this.</summary>
 
   ```
-pkg update -y -o Dpkg::Options::="--force-confnew" && pkg install git -y && git clone --depth=1 https://github.com/kastentop2005/Revancify-X.git && ./Revancify/revancify
+pkg update -y -o Dpkg::Options::="--force-confnew" && pkg install git -y && git clone --depth=1 https://github.com/kastentop2005/Revancify-X.git && ./Revancify-X/revx
 ```
 </details>
 
