@@ -186,9 +186,9 @@ exitstatus=$?
 clear
 cd "$HOME" || :
 if [ $exitstatus -eq 0 ]; then
-    echo "Script exited !!"
+    echo "Revancify has been exited"
 else
-    echo "Script terminated !!"
+    echo "Revancify has been terminated"
     rm -rf -- *cache >/dev/null 2>&1
 fi
 tput cnorm
