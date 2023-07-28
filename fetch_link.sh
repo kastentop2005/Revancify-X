@@ -9,16 +9,16 @@ appVer="$3"
 
 page1=$(curl -vsL -A "$UserAgent" "https://www.apkmirror.com/apk/$developer/$appName/$appName-$appVer-release" 2>&1)
 
-canonicalUrl=$(./pup -p --charset utf-8 'link[rel="canonical"] attr{href}' <<<"$page1")
+canonicalUrl=$(pup -p --charset utf-8 'link[rel="canonical"] attr{href}' <<<"$page1")
 if [[ "$canonicalUrl" == *"apk-download"* ]]; then
     url1=("${canonicalUrl/"https://www.apkmirror.com/"//}")
 else
     grep -q 'class="error404"' <<<"$page1" && echo noversion >&2 && exit 1
 
-    page2=$(./pup -p --charset utf-8 ':parent-of(:parent-of(span:contains("APK")))' <<<"$page1")
+    page2=$(pup -p --charset utf-8 ':parent-of(:parent-of(span:contains("APK")))' <<<"$page1")
 
-    [[ "$(./pup -p --charset utf-8 ':parent-of(div:contains("noarch"))' <<<"$page2")" == "" ]] || arch=noarch
-    [[ "$(./pup -p --charset utf-8 ':parent-of(div:contains("universal"))' <<<"$page2")" == "" ]] || arch=universal
+    [[ "$(pup -p --charset utf-8 ':parent-of(div:contains("noarch"))' <<<"$page2")" == "" ]] || arch=noarch
+    [[ "$(pup -p --charset utf-8 ':parent-of(div:contains("universal"))' <<<"$page2")" == "" ]] || arch=universal
 
     readarray -t url1 < <(./pup -p --charset utf-8 ":parent-of(div:contains(\"$arch\")) a.accent_color attr{href}" <<<"$page2")
 
