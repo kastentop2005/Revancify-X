@@ -23,14 +23,14 @@
 1. Open Termux.  
 2. Copy and paste this command.  
 ```
-curl -sL "https://raw.githubusercontent.com/kastentop2005/Revancify/main/install.sh" | bash
+curl -sL "https://raw.githubusercontent.com/kastentop2005/Revancify-X/main/install.sh" | bash
 ```
 
 <details>
   <summary>If the above one doesn't work, use this.</summary>
 
   ```
-pkg update -y -o Dpkg::Options::="--force-confnew" && pkg install git -y && git clone --depth=1 https://github.com/kastentop2005/Revancify.git && ./Revancify/revancify
+pkg update -y -o Dpkg::Options::="--force-confnew" && pkg install git -y && git clone --depth=1 https://github.com/kastentop2005/Revancify-X.git && ./Revancify/revancify
 ```
 </details>
 
