@@ -22,12 +22,12 @@ setEnv() {
 
 initialize() {
     internalStorage="/storage/emulated/0"
-    storagePath="$internalStorage/Revancify"
+    storagePath="$internalStorage/RevancifyX"
     [ ! -d "$storagePath" ] && mkdir -p "$storagePath"
     [ ! -d apps ] && mkdir -p apps
     arch=$(getprop ro.product.cpu.abi)
-    repoDir="$HOME/Revancify"
-    header=(dialog --backtitle "Revancify | [Arch: $arch, SU: $rootStatus]" --no-shadow)
+    repoDir="$HOME/RevancifyX"
+    header=(dialog --backtitle "Revancify X | [Arch: $arch, SU: $rootStatus]" --no-shadow)
     envFile=config.cfg
     [ ! -f "apps/.appSize" ] && : > "apps/.appSize"
 
@@ -103,7 +103,7 @@ getTools() {
     fetchToolsAPI || return 1
     if [ -f "$patchesSource-patches-$patchesLatest.jar" ] && [ -f "$patchesSource-patches-$patchesLatest.json" ] && [ -f "$cliSource-cli-$cliLatest.jar" ] && [ -f "$integrationsSource-integrations-$integrationsLatest.apk" ] && [ "$cliSize" == "$cliAvailableSize" ] && [ "$patchesSize" == "$patchesAvailableSize" ] && [ "$integrationsSize" == "$integrationsAvailableSize" ]; then
         if [ "$(bash "$repoDir/fetch_patches.sh" "$source" online "$storagePath")" == "error" ]; then
-            "${header[@]}" --msgbox "Tools are successfully downloaded but Apkmirror API is not accessible. So, patches are not successfully synced.\nRevancify may crash.\n\nChange your network." 12 45
+            "${header[@]}" --msgbox "Tools are successfully downloaded but Apkmirror API is not accessible. So, patches are not successfully synced.\nRevancify X may crash.\n\nChange your network." 12 45
             return 1
         fi
         "${header[@]}" --msgbox "Tools are already downloaded !!\n\nPatches are successfully synced." 12 45
@@ -135,7 +135,7 @@ getTools() {
     fi
 
     if [ "$(bash "$repoDir/fetch_patches.sh" "$source" online "$storagePath")" == "error" ]; then
-        "${header[@]}" --msgbox "Tools are successfully downloaded but Apkmirror API is not accessible. So, patches are not successfully synced.\nRevancify may crash.\n\nChange your network." 12 45
+        "${header[@]}" --msgbox "Tools are successfully downloaded but Apkmirror API is not accessible. So, patches are not successfully synced.\nRevancify X may crash.\n\nChange your network." 12 45
         return 1
     fi
 
@@ -259,7 +259,7 @@ editPatchOptions() {
 rootInstall() {
     "${header[@]}" --infobox "Please Wait !!\nInstalling Patched $appName..." 12 45
     if ! su -mm -c "/system/bin/sh $repoDir/root_util.sh mount $pkgName $appName $appVer $sourceName" > /dev/null 2>&1; then
-        "${header[@]}" --msgbox "Installation Failed !!\nLogs saved to \"Internal-Storage/Revancify/install_log.txt\". Share the Install logs to developer." 12 45
+        "${header[@]}" --msgbox "Installation Failed !!\nLogs saved to \"Internal-Storage/RevancifyX/install_log.txt\". Share the Install logs to developer." 12 45
         return 1
     else
         "${header[@]}" --msgbox "$appName installed Successfully !!" 12 45
@@ -303,7 +303,7 @@ refreshJson() {
         internet || return 1
         "${header[@]}" --infobox "Please Wait !!" 12 45
         if [ "$(bash "$repoDir/fetch_patches.sh" "$source" online "$storagePath")" == "error" ]; then
-            "${header[@]}" --msgbox "Oops !! Apkmirror API is not accessible. Patches are not successfully synced.\nRevancify may crash.\n\nChange your network." 12 45
+            "${header[@]}" --msgbox "Oops !! Apkmirror API is not accessible. Patches are not successfully synced.\nRevancify X may crash.\n\nChange your network." 12 45
             return 1
         fi
     fi
@@ -545,7 +545,7 @@ patchApp() {
     then
         keystore="$storagePath/custom.keystore"
     else
-        keystore="$repoDir"/revancify.keystore
+        keystore="$repoDir"/revx.keystore
     fi
     includedPatches=$(jq '.' "$storagePath/$source-patches.json" 2>/dev/null || jq -n '[]')
     patchesArg=$(jq -n -r --argjson includedPatches "$includedPatches" --arg pkgName "$pkgName" '$includedPatches[] | select(.pkgName == $pkgName).includedPatches | if ((. | length) != 0) then (.[] | "-i " + (. | ascii_downcase | sub(" "; "-"; "g"))) else empty end')
@@ -554,7 +554,7 @@ patchApp() {
     tput civis
     sleep 1
     if [ ! -f "apps/$appName-$appVer/base-$sourceName.apk" ]; then
-        "${header[@]}" --msgbox "Oops, Patching failed !!\nLogs saved to \"Internal Storage/Revancify/patch_log.txt\". Share the Patchlog to developer." 12 45
+        "${header[@]}" --msgbox "Oops, Patching failed !!\nLogs saved to \"Internal Storage/RevancifyX/patch_log.txt\". Share the Patchlog to developer." 12 45
         return 1
     fi
 }
@@ -607,7 +607,7 @@ deleteComponents() {
 }
 
 preferences() {
-    prefsArray=("lightTheme" "$lightTheme" "Use Light theme for Revancify" "riplibsRVX" "$riplibsRVX" "[RVX] Removes extra libs from app" "forceUpdateCheckStatus" "$forceUpdateCheckStatus" "Check for tools update at startup" "patchMenuBeforePatching" "$patchMenuBeforePatching" "Shows Patches Menu before Patching starts" "launchAppAfterMount" "$launchAppAfterMount" "[Root] Launches app automatically after mount" allowVersionDowngrade "$allowVersionDowngrade" "[Root] Allows downgrading version if any such module is present" "fetchPreRelease" "$fetchPreRelease" "Fetches the pre-release version of tools")
+    prefsArray=("lightTheme" "$lightTheme" "Use Light theme for Revancify X" "riplibsRVX" "$riplibsRVX" "[RVX] Removes extra libs from app" "forceUpdateCheckStatus" "$forceUpdateCheckStatus" "Check for tools update at startup" "patchMenuBeforePatching" "$patchMenuBeforePatching" "Shows Patches Menu before Patching starts" "launchAppAfterMount" "$launchAppAfterMount" "[Root] Launches app automatically after mount" allowVersionDowngrade "$allowVersionDowngrade" "[Root] Allows downgrading version if any such module is present" "fetchPreRelease" "$fetchPreRelease" "Fetches the pre-release version of tools")
     readarray -t prefsArray < <(for pref in "${prefsArray[@]}"; do sed 's/false/off/;s/true/on/' <<< "$pref"; done)
     read -ra newPrefs < <("${header[@]}" --begin 2 0 --title '| Preferences Menu |' --item-help --no-items --no-cancel --ok-label "Save" --checklist "Use arrow keys to navigate; Press Spacebar to toogle patch" $(($(tput lines) - 3)) -1 15 "${prefsArray[@]}" 2>&1 >/dev/tty)
     sed -i 's/true/false/' "$envFile"
