@@ -1,5 +1,6 @@
-# Revancify X ![Hi](https://img.shields.io/github/stars/kastentop2005/Revancify?style=flat-square)
+# Revancify X ![Hi](https://img.shields.io/github/stars/kastentop2005/Revancify-X?style=flat-square)
 ### A TUI wrapper for Revanced CLI with amazing features.
+### Revancify X (or simply "Revx" [riˈvɪks]) is continuation of the discontinued Revancify manager by [decipher3114](https://github.com/decipher3114)
 
 ## Termux
 | Android Version | Download Link|
@@ -8,14 +9,14 @@
 | Android 4+ | [Termux](https://github.com/termux/termux-app/releases/latest)
 
 # Features
-1. Auto updates Patches and CLI
-2. Interactive and Easy to use
+1. Auto updates patches and CLI
+2. Interactive and easy to use
 3. Inbuilt scrapper for [ApkMirror](https://apkmirror.com)
     > Only support apps available on apkmirror. However, you can still download app manually and use the apk file to patch
-4. Contains User-friendly Patch-options Editor
+4. Contains user-friendly patch options Editor
 5. Conserve selected patches
-6. Supports App Version downgrade for devices with Signature Spoof enabled
-7. Convenient Installation and usage
+6. Supports app downgrade for devices with signature spoofing enabled
+7. Convenient installation and usage
 6. Lightweight and faster than any other tool
 
 
@@ -35,9 +36,9 @@ pkg update -y -o Dpkg::Options::="--force-confnew" && pkg install git -y && git 
 </details>
 
 ## Usage
-After installation, type `revancify` in termux and press enter.  
+After installation, type `revx` in termux and press enter.
 
-Or use with arguments. Check them with `revancify -h` or `revancify --help`
+Or use with arguments. Check them with `revx -h` or `revx --help`
 
 # Thanks & Credits
 [Revanced](https://github.com/revanced)  
