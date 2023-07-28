@@ -91,6 +91,7 @@ source "$DATA/.envVars" > /dev/null 2>&1
 export DIALOGRC="$path/configs/.dialogrc$theme"
 
 checkdependencies() {
+    [ ! -d "$HOME/storage" ] && termux-setup-storage
     for dep in aapt2 pup wget tput dialog jq
     do
         if ping -c 1 google.com &> /dev/null; then
@@ -115,37 +116,6 @@ checkdependencies() {
     if ! command -v revx; then
         cp "$path/revx" "$BIN/revx"
     fi
-}
-
-installdependencies() {
-    clear
-    echo "Installing dependencies..."
-    cp "$path/revx" "$BIN/revx"
-    sleep 1
-    [ ! -d "$HOME/storage" ] && termux-setup-storage
-    pkg update -y -o Dpkg::Options::="--force-confnew" || return 1
-    pkg install openjdk-17 wget ncurses-utils dialog jq -y -o Dpkg::Options::="--force-confnew" || return 1
-    git config --global pull.rebase true
-    sed -i '/allow-external-apps/s/# //' "$HOME/.termux/termux.properties"
-
-    if ! command -v aapt2 &> /dev/null
-    then
-        echo "aapt2 was not found, installing..."
-        pkg install -y aapt2
-    else
-        echo "aapt2 is already installed. Skipping..."
-    fi
-
-    if ! command -v pup &> /dev/null
-    then
-        echo "pup was not found, installing..."
-        pkg install -y pup
-    else
-        echo "pup is already installed. Skipping..."
-    fi
-
-    echo "Dependencies have been installed successfully"
-    return 0
 }
 
 checkrevancify() {
