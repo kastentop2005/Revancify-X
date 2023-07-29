@@ -37,7 +37,7 @@ fi
 
 # Download Revancify X
 if git clone --depth=1 https://github.com/kastentop2005/Revancify-X RevancifyX; then
-    printf "${green}Revancify X has been successfully installed! Launching${normal}"
+    printf "${green}Revancify X has been successfully installed! Launching${normal}\n"
     sleep 2
     ./RevancifyX/revx
 else
