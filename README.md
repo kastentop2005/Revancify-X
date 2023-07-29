@@ -22,7 +22,6 @@
 6. Lightweight and faster than any other tool
 
 ## Current problems
-- The theme is broken
 - Create an issue if anything else
 
 ## Installation
