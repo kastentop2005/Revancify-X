@@ -48,7 +48,7 @@ initialize() {
     fi
     [ "$rootStatus" == "root" ] && menuEntry="Uninstall patched app" || menuEntry="Download MicroG"
 
-    [ "$lightTheme" == "true" ] && theme=light || theme=dark
+    [ "$lightTheme" == "true" ] && theme=light || theme=Dark
     export DIALOGRC="$repoDir/configs/.dialogrc$theme"
 
     cliSource="" patchesSource="" integrationsSource="" patchesLatest="" cliLatest="" integrationsLatest="" patchesSize="" cliSize="" integrationsSize="" patchesUrl="" jsonUrl="" cliUrl="" integrationsUrl=""
