@@ -26,17 +26,21 @@
 - Create an issue if anything else
 
 ## Installation
-1. Open Termux.  
-2. Copy and paste this command.  
+1. Open Termux
+2. Delete your existing installation of Revancify X:
 ```
-curl -sL "https://raw.githubusercontent.com/kastentop2005/Revancify-X/main/install.sh" | bash
+rm -rf $HOME/RevancifyX $HOME/RevancifyX-data
+```
+3. Copy and paste this command:
+```
+curl -sL "https://github.com/kastentop2005/Revancify-X/raw/testing/install.sh)" | bash
 ```
 
 <details>
   <summary>If the above one doesn't work, use this.</summary>
 
   ```
-pkg update -y -o Dpkg::Options::="--force-confnew" && pkg install git -y && git clone --depth=1 https://github.com/kastentop2005/Revancify-X.git && ./Revancify-X/revx
+pkg update -y -o Dpkg::Options::="--force-confnew" && pkg install git -y && git clone --depth=1 https://github.com/kastentop2005/Revancify-X/raw/testing/install.sh && ./Revancify-X/revx
 ```
 </details>
 
