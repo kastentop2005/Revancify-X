@@ -536,7 +536,7 @@ downloadMicrog() {
 }
 
 patchApp() {
-    arch=getprop ro.product.cpu.abi
+    arch=$(getprop ro.product.cpu.abi)
     bin=/data/data/com.termux/files/usr/bin
 
     if [ "$source" == "inotia00" ] && [ "$riplibsRVX" == "true" ]; then
