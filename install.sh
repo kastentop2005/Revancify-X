@@ -36,6 +36,7 @@ It is recommended that you delete it. Delete?${normal}
         printf "Invalid option selected"
         exit 1
     esac
+fi
 
 # Check for working internet connection
 wget -q --spider http://google.com
