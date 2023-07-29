@@ -22,7 +22,8 @@
 6. Lightweight and faster than any other tool
 
 ## Current problems
-- Can't download apps
+- The theme is broken
+- Create an issue if anything else
 
 ## Installation
 1. Open Termux.  
