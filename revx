@@ -94,7 +94,7 @@ checkdependencies() {
     arch=$(getprop ro.product.cpu.abi)
 
     [ ! -d "$HOME/storage" ] && termux-setup-storage
-    for dep in aapt2 pup wget dialog jq
+    for dep in pup wget dialog jq
     do
         if ping -c 1 google.com &> /dev/null; then
             if ! command -v $dep &> /dev/null; then
@@ -109,6 +109,10 @@ checkdependencies() {
     done
 
     # Here come dependecies which have different repository names from the binary ones
+    if [[ ! -f $BIN/aapt2_$arch ]]; then
+        wget -O "$BIN/aapt2_$arch" "https://github.com/kastentop2005/Revx-binaries/releases/download/v1/aapt2_$arch"
+    fi
+
     if ! command -v tput &> /dev/null; then
         echo "Couldn't find ncurses. Installing..."
         pkg install -y ncurses-utils
@@ -123,9 +127,6 @@ checkdependencies() {
         cp "$path/revx" "$BIN/revx"
     fi
 
-    # Download custom aapt2 binary to test if it fixes patching
-    if [[ ! -e "$BIN/aapt2_$arch" ]]; then
-        wget -O "$BIN/aapt2_$arch" "https://github.com/kastentop2005/Revx-binaries/releases/download/v1/aapt2_$arch"
 }
 
 checkrevancify() {
