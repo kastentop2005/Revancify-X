@@ -537,7 +537,6 @@ downloadMicrog() {
 
 patchApp() {
     arch=$(getprop ro.product.cpu.abi)
-    bin=/data/data/com.termux/files/usr/bin
 
     if [ "$source" == "inotia00" ] && [ "$riplibsRVX" == "true" ]; then
         riplibArgs="--rip-lib=x86_64 --rip-lib=x86 --rip-lib=armeabi-v7a --rip-lib=arm64-v8a "
@@ -551,7 +550,7 @@ patchApp() {
     fi
     includedPatches=$(jq '.' "$storagePath/$source-patches.json" 2>/dev/null || jq -n '[]')
     patchesArg=$(jq -n -r --argjson includedPatches "$includedPatches" --arg pkgName "$pkgName" '$includedPatches[] | select(.pkgName == $pkgName).includedPatches | if ((. | length) != 0) then (.[] | "-i " + (. | ascii_downcase | sub(" "; "-"; "g"))) else empty end')
-    java -jar "$cliSource"-cli-*.jar -b "$patchesSource"-patches-*.jar -m "$integrationsSource"-integrations-*.apk -c -a "apps/$appName-$appVer/base.apk" -o "apps/$appName-$appVer/base-$sourceName.apk" $patchesArg $riplibArgs --keystore "$keystore" --custom-aapt2-binary .$bin/aapt2_$arch --options "$storagePath/$source-options.json" --experimental --exclusive 2>&1 | tee "$storagePath/patch_log.txt" | "${header[@]}" --begin 2 0 --ok-label "Continue" --cursor-off-label --programbox "Patching $appName $selectedVer.apk" -1 -1
+    java -jar "$cliSource"-cli-*.jar -b "$patchesSource"-patches-*.jar -m "$integrationsSource"-integrations-*.apk -c -a "apps/$appName-$appVer/base.apk" -o "apps/$appName-$appVer/base-$sourceName.apk" $patchesArg $riplibArgs --keystore "$keystore" --custom-aapt2-binary ./aapt2_$arch --options "$storagePath/$source-options.json" --experimental --exclusive 2>&1 | tee "$storagePath/patch_log.txt" | "${header[@]}" --begin 2 0 --ok-label "Continue" --cursor-off-label --programbox "Patching $appName $selectedVer.apk" -1 -1
     echo -e "\n\n\nVariant: $rootStatus\nArch: $arch\nApp: $appName v$appVer\nCLI: $(ls "$cliSource"-cli-*.jar)\nPatches: $(ls "$patchesSource"-patches-*.jar)\nIntegrations: $(ls "$integrationsSource"-integrations-*.apk)\nPatches argument: ${patchesArg[*]}" >>"$storagePath/patch_log.txt"
     tput civis
     sleep 1
