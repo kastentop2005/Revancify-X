@@ -18,6 +18,25 @@ lightpurple='\033[1;35m'
 lightcyan='\033[1;36m'
 white='\033[1;37m'
 
+# Check for existing Revancify installation
+if [ -d "$HOME/Revancify" ]; then
+    printf"${orange}Existing Revancify installation has been detected
+It is recommended that you delete it. Delete?${normal}
+[Y/N]: "
+    read choice
+    case choice in
+    Y | y)
+        printf "Deleting Revancify..."
+        rm -rf $HOME/Revancify $HOME/revancify-data
+        ;;
+    N | n)
+        printf "Continuing..."
+        ;;
+    *)
+        printf "Invalid option selected"
+        exit 1
+    esac
+
 # Check for working internet connection
 wget -q --spider http://google.com
 if [ ! $? -eq 0 ]; then
