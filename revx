@@ -94,7 +94,7 @@ checkdependencies() {
     arch=$(getprop ro.product.cpu.abi)
 
     [ ! -d "$HOME/storage" ] && termux-setup-storage
-    for dep in pup wget dialog jq
+    for dep in pup aapt2 wget dialog jq
     do
         if ping -c 1 google.com &> /dev/null; then
             if ! command -v $dep &> /dev/null; then
