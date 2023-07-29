@@ -94,7 +94,7 @@ checkdependencies() {
     arch=$(getprop ro.product.cpu.abi)
 
     [ ! -d "$HOME/storage" ] && termux-setup-storage
-    for dep in pup wget dialog jq
+    for dep in pup aapt2 wget dialog jq
     do
         if ping -c 1 google.com &> /dev/null; then
             if ! command -v $dep &> /dev/null; then
@@ -109,8 +109,9 @@ checkdependencies() {
     done
 
     # Here come dependecies which have different repository names from the binary ones
-    if [[ ! -f aapt2_$arch ]]; then
-        wget -O "aapt2_$arch" "https://github.com/kastentop2005/Revx-binaries/releases/download/v1/aapt2_$arch"
+    if [[ ! -f $DATA/aapt2_$arch ]]; then
+        wget -O "$DATA/aapt2_$arch" "https://github.com/kastentop2005/Revx-binaries/releases/download/v1/aapt2_$arch"
+        chmod +x "$DATA/aapt2_$arch"
     fi
 
     if ! command -v tput &> /dev/null; then
