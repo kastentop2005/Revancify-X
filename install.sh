@@ -66,7 +66,7 @@ Possible causes of error:
     pkg install git -y -o Dpkg::Options::="--force-confnew"
 fi
 
-if git clone --depth=1 https://github.com/kastentop2005/Revancify-X $HOME/RevancifyX; then
+if git clone --branch testing --depth=1 https://github.com/kastentop2005/Revancify-X $HOME/RevancifyX; then
     bash $HOME/RevancifyX/revx
 else
     echo -e "${red}Couldn't download required resources. Can't proceed${normal}"
