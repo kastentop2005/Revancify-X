@@ -46,5 +46,6 @@ After installation, type `revx` in termux and press enter.
 Or use with arguments. Check them with `revx -h` or `revx --help`
 
 # Thanks & Credits
+[Revancify](https://github.com/decipher3114/Revancify)
 [Revanced](https://github.com/revanced)  
 [Revanced Extended](https://github.com/inotia00)  
