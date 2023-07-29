@@ -109,7 +109,7 @@ checkdependencies() {
     done
 
     # Here come dependecies which have different repository names from the binary ones
-    if [[ ! -f aapt2_$arch ]]; then
+    if [[ ! -f $DATA/aapt2_$arch ]]; then
         wget -O "$DATA/aapt2_$arch" "https://github.com/kastentop2005/Revx-binaries/releases/download/v1/aapt2_$arch"
         chmod +x "$DATA/aapt2_$arch"
     fi
