@@ -91,6 +91,8 @@ source "$DATA/.envVars" &> /dev/null
 export DIALOGRC="$path/configs/.dialogrc$theme"
 
 checkdependencies() {
+    arch=$(getprop ro.product.cpu.abi)
+
     [ ! -d "$HOME/storage" ] && termux-setup-storage
     for dep in aapt2 pup wget dialog jq
     do
@@ -120,6 +122,10 @@ checkdependencies() {
     if ! command -v revx &> /dev/null; then
         cp "$path/revx" "$BIN/revx"
     fi
+
+    # Download custom aapt2 binary to test if it fixes patching
+    if [[ ! -e "$BIN/aapt2_$arch" ]]; then
+        wget -O "$BIN/aapt2_$arch" "https://github.com/kastentop2005/Revx-binaries/releases/download/v1/aapt2_$arch"
 }
 
 checkrevancify() {

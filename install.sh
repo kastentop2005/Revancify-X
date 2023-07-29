@@ -38,12 +38,12 @@ It is recommended that you delete it. Delete?${normal}
     esac
 fi
 
-# Check for working internet connection
-wget -q --spider http://google.com
-if [ ! $? -eq 0 ]; then
-    printf "${red}Can't connect to the internet! Aborting..."
-    exit 1
-fi
+# Check for working internet connection (I'll redo this later)
+# wget -q --spider http://google.com
+# if [ ! $? -eq 0 ]; then
+#     printf "${red}Can't connect to the internet! Aborting..."
+#     exit 1
+# fi
 
 # Check if we are running from Termux
 if [ -z "$TERMUX_VERSION" ]; then
