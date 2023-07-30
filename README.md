@@ -28,7 +28,7 @@
 1. Open Termux.  
 2. Copy and paste this command.  
 ```
-curl -sL "https://raw.githubusercontent.com/kastentop2005/Revancify-X/main/install.sh" | bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/kastentop2005/Revancify-X/main/install.sh)"
 ```
 
 <details>
