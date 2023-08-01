@@ -32,14 +32,14 @@ rm -rf $HOME/RevancifyX $HOME/RevancifyX-data
 ```
 3. Copy and paste this command:
 ```
-curl -sL "https://github.com/kastentop2005/Revancify-X/raw/testing/install.sh)" | bash
+curl -sL "https://github.com/kastentop2005/Revancify-X/raw/testing/install.sh" | bash
 ```
 
 <details>
   <summary>If the above one doesn't work, use this.</summary>
 
   ```
-pkg update -y -o Dpkg::Options::="--force-confnew" && pkg install git -y && git clone --depth=1 https://github.com/kastentop2005/Revancify-X/raw/testing/install.sh && ./Revancify-X/revx
+pkg update -y -o Dpkg::Options::="--force-confnew" && pkg install git -y && git clone --branch testing --single-branch --depth=1 https://github.com/kastentop2005/Revancify-X/raw/testing/install.sh && ./Revancify-X/revx
 ```
 </details>
 
