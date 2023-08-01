@@ -37,6 +37,7 @@ initialize() {
     setEnv lightTheme false init "$envFile"
     setEnv patchMenuBeforePatching false init "$envFile"
     setEnv launchAppAfterMount true init "$envFile"
+    setEnv saveApk "$envFile"
     setEnv allowVersionDowngrade false init "$envFile"
     setEnv fetchPreRelease false init "$envFile"
     # shellcheck source=/dev/null
@@ -46,9 +47,9 @@ initialize() {
         source=$("${header[@]}" --begin 2 0 --title '| Source Selection Menu |' --no-cancel --ok-label "Done" --radiolist "Use arrow keys to navigate; Press Spacebar to select option" -1 -1 0 "${allSources[@]}" 2>&1 >/dev/tty)
         setEnv source "$source" update "$envFile"
     fi
-    [ "$rootStatus" == "root" ] && menuEntry="Uninstall patched app" || menuEntry="Download MicroG"
 
-    [ "$lightTheme" == "true" ] && theme=light || theme=Dark
+    [ "$rootStatus" == "root" ] && menuEntry="Uninstall patched app" || menuEntry="Download MicroG"
+    [ "$lightTheme" == "true" ] && theme=Light || theme=Dark
     export DIALOGRC="$repoDir/configs/.dialogrc$theme"
 
     cliSource="" patchesSource="" integrationsSource="" patchesLatest="" cliLatest="" integrationsLatest="" patchesSize="" cliSize="" integrationsSize="" patchesUrl="" jsonUrl="" cliUrl="" integrationsUrl=""
@@ -557,6 +558,11 @@ patchApp() {
     if [ ! -f "apps/$appName-$appVer/base-$sourceName.apk" ]; then
         "${header[@]}" --msgbox "Oops, Patching failed !!\nLogs saved to \"Internal Storage/RevancifyX/patch_log.txt\". Share the Patchlog to developer." 12 45
         return 1
+    else
+        if [ ! -d "/sdcard/Download/Revx_Download/" ]; then
+        mkdir "/sdcard/Download/RevX_Download"
+        fi
+        cp "apps/$appName-$appVer/base-$sourceName.apk" "/sdcard/Download/RevX_Download/"
     fi
 }
 
@@ -608,7 +614,16 @@ deleteComponents() {
 }
 
 preferences() {
-    prefsArray=("lightTheme" "$lightTheme" "Use Light theme for Revancify X" "riplibsRVX" "$riplibsRVX" "[RVX] Removes extra libs from app" "forceUpdateCheckStatus" "$forceUpdateCheckStatus" "Check for tools update at startup" "patchMenuBeforePatching" "$patchMenuBeforePatching" "Shows Patches Menu before Patching starts" "launchAppAfterMount" "$launchAppAfterMount" "[Root] Launches app automatically after mount" allowVersionDowngrade "$allowVersionDowngrade" "[Root] Allows downgrading version if any such module is present" "fetchPreRelease" "$fetchPreRelease" "Fetches the pre-release version of tools")
+    prefsArray=(
+    "lightTheme" "$lightTheme" "Use light theme"
+    "riplibsRVX" "$riplibsRVX" "[RVX] Removes extra libraries from app" \
+    "forceUpdateCheckStatus" "$forceUpdateCheckStatus" "Check for tools' updates at startup" \
+    "patchMenuBeforePatching" "$patchMenuBeforePatching" "Show patch menu before installing" \
+    "launchAppAfterMount" "$launchAppAfterMount" "[Root] Launch app automatically after mount" \
+    "allowVersionDowngrade" "$allowVersionDowngrade" "[Root] Allows downgrading app version" \
+    "saveApk" "$saveApk" "Copies downloaded apk to /sdcard/Download/RevX_Download/"
+    "fetchPreRelease" "$fetchPreRelease" "Fetches the pre-release version of tools"
+    )
     readarray -t prefsArray < <(for pref in "${prefsArray[@]}"; do sed 's/false/off/;s/true/on/' <<< "$pref"; done)
     read -ra newPrefs < <("${header[@]}" --begin 2 0 --title '| Preferences Menu |' --item-help --no-items --no-cancel --ok-label "Save" --checklist "Use arrow keys to navigate; Press Spacebar to toogle patch" $(($(tput lines) - 3)) -1 15 "${prefsArray[@]}" 2>&1 >/dev/tty)
     sed -i 's/true/false/' "$envFile"
