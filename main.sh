@@ -37,7 +37,7 @@ initialize() {
     setEnv lightTheme false init "$envFile"
     setEnv patchMenuBeforePatching false init "$envFile"
     setEnv launchAppAfterMount true init "$envFile"
-    setEnv saveApk "$envFile"
+    setEnv saveApk "$envFile" false init "$envFile"
     setEnv allowVersionDowngrade false init "$envFile"
     setEnv fetchPreRelease false init "$envFile"
     # shellcheck source=/dev/null

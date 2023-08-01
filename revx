@@ -98,13 +98,13 @@ checkdependencies() {
     do
         if ping -c 1 google.com &> /dev/null; then
             if ! command -v $dep &> /dev/null; then
-                echo "$dep is not installed. Downloading..."
+                printf "$dep is not installed. Downloading..."
                 pkg install -y $dep
             else
-                echo "$dep is installed. Continue\n"
+                printf "$dep is installed. Continue\n"
             fi
         else
-            echo "Can't reach the internet. Check your connection settings and try again later"
+            printf "Can't reach the internet. Check your connection settings and try again later"
         fi
     done
 
