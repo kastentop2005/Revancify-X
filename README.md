@@ -11,32 +11,28 @@
 | Android 4+ | [Termux](https://github.com/termux/termux-app/releases/latest)
 
 # Features
-1. Auto updates patches and CLI
+1. Auto update patches and CLI
 2. Interactive and easy to use
 3. Inbuilt scrapper for [ApkMirror](https://apkmirror.com)
-    > Only support apps available on apkmirror. However, you can still download app manually and use the apk file to patch
-4. Contains user-friendly patch options Editor
+    > Only apps present on APKMirror are supported. However, you can still download app manually and use the apk file to patch
+4. Contains user-friendly patch options editor
 5. Conserve selected patches
 6. Supports app downgrade for devices with signature spoofing enabled
 7. Convenient installation and usage
 6. Lightweight and faster than any other tool
 
 ## Current problems
-- Create an issue if anything else
+- Create an issue if any
 
 ## Installation
 1. Open Termux
-2. Delete your existing installation of Revancify X:
+2. Copy and paste this command:
 ```
-rm -rf $HOME/RevancifyX $HOME/RevancifyX-data
-```
-3. Copy and paste this command:
-```
-curl -sL "https://github.com/kastentop2005/Revancify-X/raw/testing/install.sh" | bash
+bash -c "$(curl -fsSL https://github.com/kastentop2005/Revancify-X/raw/testing/install.sh)"
 ```
 
 <details>
-  <summary>If the above one doesn't work, use this.</summary>
+  <summary>If the above one doesn't work, use this</summary>
 
   ```
 pkg update -y -o Dpkg::Options::="--force-confnew" && pkg install git -y && git clone --branch testing --single-branch --depth=1 https://github.com/kastentop2005/Revancify-X/raw/testing/install.sh && ./Revancify-X/revx
@@ -46,7 +42,13 @@ pkg update -y -o Dpkg::Options::="--force-confnew" && pkg install git -y && git 
 ## Usage
 After installation, type `revx` in termux and press enter.
 
-Or use with arguments. Check them with `revx -h` or `revx --help`
+You can also run Revancify X with arguments:
+```
+-n, --no-root     Run in non-root mode
+-o, --offline     Run in offline mode
+-r, --reinstall   Reinstall revancify X
+-h, --help        Prints help statement
+```
 
 # Thanks & Credits
 [Revancify](https://github.com/decipher3114/Revancify)

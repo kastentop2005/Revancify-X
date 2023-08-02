@@ -2,74 +2,83 @@
 
 # Colors
 normal='\033[0m'
-red='\033[0;31m'
-green='\033[0;32m'
-orange='\033[0;33m'
-blue='\033[0;34m'
-purple='\033[0;35m'
-cyan='\033[0;36m'
 lightred='\033[1;31m'
 lightgreen='\033[1;32m'
 lightblue='\033[1;34m'
-lightpurple='\033[1;35m'
-lightcyan='\033[1;36m'
-white='\033[1;37m'
 
+# Check if we are running from Termux session
+if [ -z "$TERMUX_VERSION" ]; then
+	printf "${red}Termux hasn't been detected. Are you sure you have installed and are running it?${normal}\n"
+	exit 1
+fi
+
+# Check for internet connection
 servers=("google.com" "raw.githubusercontent.com")
-
 for server in "${servers[@]}"; do
-    if ! ping -c 1 -W 3 "$server"&> /dev/null; then
-        echo -e "\e[1;31m$server is not reachable with your current network.\nChange your network configuration.\e[0m"
-    fi
+	if ! ping -c 1 -W 3 "$server"&> /dev/null; then
+		printf "${lightred}Can't connect to network. Make sure your connection is stable and nothing is blocking it${normal}\n"
+		exit 1
+	fi
 done
 
-if [ -z "$TERMUX_VERSION" ]; then
-    printf "${red}Termux hasn't been detected. Are you sure you have installed and are running it?${normal}"
-    exit 1
+# Update repositores
+printf "${lightblue}Please wait... Updating repositores${normal}\n"
+if ! pkg update -y -o Dpkg::Options::="--force-confnew" &> /dev/null; then
+	printf "${lighred}Unable to update repositories. Check your network or try running 'termux-change-repo'${normal}\n"
+	exit 1
 fi
 
-if [[ -d $HOME/Revancify ]]; then
-    printf "${orange}Old Revancify installation has been detected. Problems may occur${normal}"
-    echo -e "\n1.Proceed wih installation\n2.Delete Revancify and proceed.\n3.Exit"
-    read -p "> " choice
-    if [ -z $choice ]; then
-        echo -e "No option Selected. Exiting...."
-        exit 1
-    elif [ $choice == 1 ];then
-        echo "Continuing Installation of RevancifyX."
-    elif [ $choice == 2 ];then
-        echo "Deleting Revancify."
-        rm -rf $HOME/Revancify
-        echo -e "Done\nProceeding with installation."
-    elif [ $choice == 3 ];then
-        exit 1
-    else
-        echo "Invalid Input. Exiting...."
-        exit 1
-    fi
- fi
- 
-if [ -d "$HOME/RevancifyX" ]; then
-    bash $HOME/RevancifyX/revx
-    exit 0
-fi
-
+# Download git
 if ! command -v git &> /dev/null; then
-    if ! pkg update -y -o Dpkg::Options::="--force-confnew"; then
-        echo -e "\e[1;31mOops !!
-Possible causes of error:
-1. Termux from Playstore is not maintained. Download Termux from github.
-2. Unstable internet Connection.
-3. Repository issues. Clear Termux Data and retry."
-        exit 1
-    fi
-    pkg install git -y -o Dpkg::Options::="--force-confnew"
+	printf "${lightblue}Downloading git...${normal}\n"
+	if ! pkg install -y git &> /dev/null; then
+		printf "${lightred}Unable to download Git. Make sure you got stable internet connection${normal}\n"
+		exit 1
+	fi
 fi
 
-if git clone --branch testing --depth=1 https://github.com/kastentop2005/Revancify-X $HOME/RevancifyX; then
-    bash $HOME/RevancifyX/revx
+# Check for existing Revancify installations
+if [[ -d $HOME/Revancify ]] && [[ ! -d $HOME/RevancifyX ]]; then
+	printf "Existing Revancify installation has been detected. Do you want to delete it first?\n"
+	read -r -p "[Y/N]: " choice
+	case $choice in
+		[Yy]*) printf "Deleting...\n"
+		rm -rf $HOME/Revancify
+		[[ -d $HOME/Revancify-data ]] && rm -rf $HOME/Revancify-data;;
+		[Nn]*) printf "${lightred}This may cause problems in future${normal}\n";;
+		*) printf "${lightred}Not a correct answer${normal}\n";;
+	esac
+elif [[ ! -d $HOME/Revancify ]] && [[ -d $HOME/RevancifyX ]]; then
+	printf "Existing Revancify X installation has been detected. Do you want to delete it first?\n"
+	read -r -p "[Y/N]: " choice
+	case $choice in
+		[Yy]*) printf "Deleting...\n"
+		rm -rf $HOME/RevancifyX
+		[[ -d $HOME/RevancifyX-data ]] && rm -rf $HOME/RevancifyX-data;;
+		[Nn]*) printf "${lightred}This may cause problems in future${normal}\n";;
+		*) printf "${lightred}Not a correct answer${normal}\n";;
+	esac
+elif [[ -d $HOME/Revancify ]] && [[ -d $HOME/RevancifyX ]]; then
+	printf "Existing Revancify X installation has been detected. Do you want to delete it first?\n"
+	read -r -p "[Y/N]: " choice
+	case $choice in
+		[Yy]*) printf "Deleting...\n"
+		rm -rf $HOME/Revancify && rm -rf $HOME/RevancifyX
+		[[ -d $HOME/Revancify-data ]] && rm -rf $HOME/Revancify-data
+		[[ -d $HOME/RevancifyX-data ]] && rm -rf $HOME/RevancifyX-data;;
+		[Nn]*) printf "${lightred}This may cause problems in future${normal}\n";;
+		*) printf "${lightred}Not a correct answer${normal}\n";;
+	esac
+fi
+
+# Download Revancify X
+printf "${lightblue}Downloading Revacify X...${normal}\n"
+if ! git clone --branch testing --single-branch --depth=1 https://github.com/kastentop2005/Revancify-X $HOME/RevancifyX &> /dev/null; then
+	printf "${red}Couldn't download Revancify X. Make sure your internet connection is stable${normal}\n"
+	exit 1
 else
-    echo -e "${red}Couldn't download required resources. Can't proceed${normal}"
-    echo "Please Try again"
-    exit 1
+	cp $HOME/RevancifyX/revx /data/data/com.termux/files/usr/bin/revx
+	printf "${lightgreen}Revancify X has been installed successfully! Launching...${normal}\n"
+	sleep 3
+	revx
 fi
