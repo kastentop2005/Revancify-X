@@ -77,8 +77,8 @@ if ! git clone --branch testing --single-branch --depth=1 https://github.com/kas
 	printf "${red}Couldn't download Revancify X. Make sure your internet connection is stable${normal}\n"
 	exit 1
 else
-	cp $HOME/RevancifyX/revx /data/data/com.termux/files/usr/bin/revx
- 	chmod u+x /data/data/com.termux/files/usr/bin/revx
+	cp $HOME/RevancifyX/revx $PATH/revx
+ 	chmod u+x $PATH/revx
 	printf "${lightgreen}Revancify X has been installed successfully! Launching...${normal}\n"
 	sleep 3
 	revx
