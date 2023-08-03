@@ -35,7 +35,7 @@ bash -c "$(curl -fsSL https://github.com/kastentop2005/Revancify-X/raw/testing/i
   <summary>If the above one doesn't work, use this</summary>
 
   ```
-pkg update -y -o Dpkg::Options::="--force-confnew" && pkg install git -y && git clone --branch testing --single-branch --depth=1 https://github.com/kastentop2005/Revancify-X/ && ./Revancify-X/revx
+pkg update -y -o Dpkg::Options::="--force-confnew" && pkg install git -y && git clone --branch testing --single-branch --depth=1 https://github.com/kastentop2005/Revancify-X $HOME/RevancifyX && ./RevancifyX/revx
 ```
 </details>
 
