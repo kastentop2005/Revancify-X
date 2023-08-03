@@ -78,6 +78,7 @@ if ! git clone --branch testing --single-branch --depth=1 https://github.com/kas
 	exit 1
 else
 	cp $HOME/RevancifyX/revx /data/data/com.termux/files/usr/bin/revx
+ 	chmod u+x /data/data/com.termux/files/usr/bin/revx
 	printf "${lightgreen}Revancify X has been installed successfully! Launching...${normal}\n"
 	sleep 3
 	revx
