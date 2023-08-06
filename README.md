@@ -48,3 +48,4 @@ Or use with arguments. Check them with `revx -h` or `revx --help`
 [Revancify](https://github.com/decipher3114/Revancify)
 [Revanced](https://github.com/revanced)  
 [Revanced Extended](https://github.com/inotia00)  
+[ReX](https://github.com/YT-Advanced)
